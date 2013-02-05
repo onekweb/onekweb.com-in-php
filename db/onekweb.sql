@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.1
+-- version 3.4.10.1deb1
 -- http://www.phpmyadmin.net
 --
 -- Värd: localhost
--- Skapad: 29 jan 2013 kl 16:59
--- Serverversion: 5.5.24-log
--- PHP-version: 5.3.13
+-- Skapad: 05 feb 2013 kl 18:24
+-- Serverversion: 5.5.28
+-- PHP-version: 5.3.10-1ubuntu3.4
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -23,27 +23,17 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur `aboutmepage`
---
-
-CREATE TABLE IF NOT EXISTS `aboutmepage` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `content_id` int(11) NOT NULL,
-  `content` text NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
 -- Tabellstruktur `content`
 --
 
 CREATE TABLE IF NOT EXISTS `content` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` text NOT NULL,
-  `author` varchar(40) NOT NULL,
-  `created` datetime NOT NULL,
+  `content_name` text NOT NULL,
+  `content_title` varchar(44) NOT NULL,
+  `content_author` varchar(44) NOT NULL,
+  `content_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `menu_id` int(11) NOT NULL,
+  `users_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -55,20 +45,7 @@ CREATE TABLE IF NOT EXISTS `content` (
 
 CREATE TABLE IF NOT EXISTS `footer` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `content` varchar(44) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Tabellstruktur `homepage`
---
-
-CREATE TABLE IF NOT EXISTS `homepage` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `content` text NOT NULL,
-  `content_id` int(11) NOT NULL,
+  `footer_content` varchar(44) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -79,24 +56,10 @@ CREATE TABLE IF NOT EXISTS `homepage` (
 --
 
 CREATE TABLE IF NOT EXISTS `menu` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(44) NOT NULL,
-  `content_id` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
+  `menu_name` varchar(44) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Tabellstruktur `onekworks`
---
-
-CREATE TABLE IF NOT EXISTS `onekworks` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `content` text NOT NULL,
-  `content_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -107,8 +70,7 @@ CREATE TABLE IF NOT EXISTS `onekworks` (
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(44) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL,
-  `password` int(11) NOT NULL,
-  `content_id` int(11) NOT NULL,
+  `password` int(44) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
